@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+body {
+            font-family: Arial, sans-serif;
+             background-image: url("https://cdn.create.vista.com/api/media/small/176444080/stock-photo-top-view-clipboard-calculator-office-supplies-blue");
+             height: 100%; 
+
+             background-position: center;
+             background-repeat: no-repeat;
+             background-size: cover;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+.calculator {
+    width: 250px;
+    margin: 0 auto;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    
+}
+
+.display {
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+    text-align: right;
+    font-size: 20px;
+}
+
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 5px;
+}
+
+button {
+    padding: 10px;
+    font-size: 20px;
+    background-color: #f0f0f0;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #ccc;
+}
+
+button#clear {
+    grid-column: span 2;
+}
+
+button#answer {
+    grid-column: span 2;
+}
+
+button#enter {
+    grid-column: span 4;
+}
+
+button#sqrt {
+    grid-column: span 2;
+}
+</style>
+</head>
+<body>
+    
+    <div class="calculator">
+        <div class="display" id="display">0</div>
+        <div class="buttons">
+            <button onclick="clearDisplay()" id="clear">C</button>
+            <button onclick="appendToDisplay('(')">(</button>
+            <button onclick="appendToDisplay(')')">)</button>
+            <button onclick="calculateSquareRoot()">√</button>
+            <button onclick="appendToDisplay('7')">7</button>
+            <button onclick="appendToDisplay('8')">8</button>
+            <button onclick="appendToDisplay('9')">9</button>
+            <button onclick="appendToDisplay('/')">/</button>
+            <button onclick="appendToDisplay('4')">4</button>
+            <button onclick="appendToDisplay('5')">5</button>
+            <button onclick="appendToDisplay('6')">6</button>
+            <button onclick="appendToDisplay('*')">*</button>
+            <button onclick="appendToDisplay('1')">1</button>
+            <button onclick="appendToDisplay('2')">2</button>
+            <button onclick="appendToDisplay('3')">3</button>
+            <button onclick="appendToDisplay('-')">-</button>
+            <button onclick="appendToDisplay('0')">0</button>
+            <button onclick="appendToDisplay('.')">.</button>
+            <button onclick="calculate()">=</button>
+            <button onclick="appendToDisplay('+')">+</button>
+            <button onclick="calculatePower()">x^2</button>
+        </div>
+    </div>
+
+<script>
+let displayValue = '';
+function appendToDisplay(value) {
+    displayValue += value;
+    document.getElementById('display').innerText = displayValue;
+}
+
+function clearDisplay() {
+    displayValue = '';
+    document.getElementById('display').innerText = '0';
+}
+
+function calculate() {
+    try {
+        const result = eval(displayValue);
+        displayValue = result.toString();
+        document.getElementById('display').innerText = displayValue;
+    } catch (error) {
+        displayValue = '';
+        document.getElementById('display').innerText = 'Error';
+    }
+}
+
+function calculateSquareRoot() {
+    try {
+        const result = Math.sqrt(eval(displayValue));
+        displayValue = result.toString();
+        document.getElementById('display').innerText = displayValue;
+    } catch (error) {
+        displayValue = '';
+        document.getElementById('display').innerText = 'Error';
+    }
+}
+
+function calculatePower() {
+    try {
+        const result = Math.pow(eval(displayValue), 2);
+        displayValue = result.toString();
+        document.getElementById('display').innerText = displayValue;
+    } catch (error) {
+        displayValue = '';
+        document.getElementById('display').innerText = 'Error';
+    }
+}
+</script>
+</body>
+</html>
+
